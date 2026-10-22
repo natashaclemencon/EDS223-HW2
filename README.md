@@ -11,14 +11,15 @@ Author(s): Natasha Clemencon-Charles
 
 This repo has the following structure:
 ```{r}
-EDS223-HW2  
-└───EDS223-HW2
-    └───data
-    └───HW2_files
-    └───.gitignore
-    └─── HW2.html
-    └─── HW2.qmd
-    └─── README.md
+EDS223-HW2
+├── data
+│   ├── ejscreen
+│   ├── mapping-inequality
+│   └── SWITRS_LA
+├── HW2_files
+├── HW2.html
+├── HW2.qmd
+└── README.md
 ```
 
 The visualizations and html created for this assignment were completed in the HW2.qmd.

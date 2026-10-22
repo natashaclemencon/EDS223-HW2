@@ -80,7 +80,7 @@ summary_table <- joined_ejscreen_HOLC |>
    group_by(grade) |> 
     summarise(n = (n())) |> 
     mutate(grade = ifelse(
-    grade %in% c("A", "B", "C", "D"), grade, "Missing")) |> 
+    grade %in% c("A", "B", "C", "D"), grade, "NA")) |> 
     mutate(`Percent Census In Grade` =((n)/(sum(n)) * 100)) |> 
     rename(`Number of Census Tracts Per Grade`=n) |> 
     rename(`HOLC Grade` = grade) |> 
@@ -95,10 +95,10 @@ kable(summary_table)
 # Find percent low income in HOLC grades 
 HOLCgradepercents <- joined_ejscreen_HOLC |> 
     group_by(grade) |> 
-    drop_na(grade) |> 
-    summarise(meanlowinc = mean(LOWINCPCT, na.rm=TRUE),
-meanpm25 = mean(PM25, na.rm=TRUE), 
-meanlifeexp = mean(LIFEEXPPCT, na.rm=TRUE))
+    drop_na(LOWINCPCT, P_PM25, P_LIFEEXPPCT) |> 
+    summarise(meanlowinc = mean(LOWINCPCT),
+meanpm25 = mean(P_PM25), 
+meanlifeexp = mean(P_LIFEEXPPCT))
 
 ```
 ```{r}
@@ -137,7 +137,7 @@ It seems that historical redlining grades come with issues of environmental just
 # Full join mapping_inequality and swit_SF
 joined_HOLC_swit <- st_join(swit_SF, mapping_inequality) |>
     st_drop_geometry() |> # default: `st_intersects` 
-select(grade, lat, long, PEDESTRIAN_ACCIDENT, BICYCLE_ACCIDENT, NUMBER_KILLED)
+select(grade, LATITUDE, LONGITUDE, PEDESTRIAN_ACCIDENT, BICYCLE_ACCIDENT, NUMBER_KILLED)
 
 ```
 
